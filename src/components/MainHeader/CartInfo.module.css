@@ -1,0 +1,27 @@
+.cart {
+    cursor: pointer;
+    float: right;
+    display: block;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.55);
+    padding: 0 25px;
+    font-size: 16px;
+}
+
+.icon {
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 15px 0 0;
+}
+
+.amount {
+    vertical-align: middle;
+    background: #5685e3;
+    border-radius: 5px;
+    padding: 5px 8px;
+    display: inline-block;
+    height: 25px;
+    line-height: 15px;
+    font-size: 15px;
+    margin-left: 10px;
+}

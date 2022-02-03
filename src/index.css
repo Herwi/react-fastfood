@@ -9,8 +9,25 @@ html {
 
 body {
   margin: 0;
+  background-image: url('./img/fastfood_bg.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-color: #ccc;
 }
 
 main {
   margin-top: 6rem;
+}
+
+@media(min-width:1250px) {
+  body {
+    background-position: 0% -10vh;
+  }
+}
+
+@media(min-width:1600px) {
+  body {
+    background-position: 0% -20vh;
+  }
 }
