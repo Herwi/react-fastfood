@@ -25,3 +25,21 @@
     font-size: 15px;
     margin-left: 10px;
 }
+
+.cartLabel {
+    display: inline-block;
+}
+
+@media(max-width: 768px) {
+    .cartLabel {
+        display: none;
+    }
+
+    .amount {
+        margin-left: 0;
+    }
+
+    .cart {
+        padding: 0 15px;
+    }
+}

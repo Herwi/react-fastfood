@@ -5,7 +5,7 @@ const CartInfo = () => {
     return (
         <div className={classes.cart}>
             <FaShoppingCart className={classes.icon} />
-            Your Cart
+            <div className={classes.cartLabel}>Your Cart</div>
             <div className={classes.amount}>2</div>
         </div>
     );
