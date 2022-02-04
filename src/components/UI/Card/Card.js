@@ -7,9 +7,9 @@ const Card = (props) => {
     styles += props.small ? ' ' + classes.small : '';
 
     return (
-        <dv className={styles}>
+        <div className={styles}>
             {props.children}
-        </dv>
+        </div>
     );
 };
 
