@@ -3,6 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 const CartContext = React.createContext({
     items: [],
     totalAmount: 0,
+    totalPrice: 0,
     addItem: (item) => { },
     removeItem: (id, amount) => { }
 });
@@ -22,9 +23,9 @@ const itemsListReducer = (state, action) => {
                 tmp[index].amount += action.item.amount;
             }
             else tmp.push(action.item);
-            return { items: tmp, totalAmount: action.item.amount + state.totalAmount };
+            return { ...state, items: tmp, totalAmount: action.item.amount + state.totalAmount };
         case 'setItems':
-            return { items: action.items, totalAmount: action.totalAmount };
+            return { items: action.items, totalAmount: action.totalAmount, totalPrice: action.totalPrice };
         case 'removeItem':
             let toRemove = 0;
             tmp = state.items.reduce((res, i) => {
@@ -35,19 +36,25 @@ const itemsListReducer = (state, action) => {
                     }
                     else {
                         toRemove = action.amount;
-                        return res.push({ ...i, amount: i.amount - action.amount });
+                        return [...res, { ...i, amount: i.amount - action.amount }];
                     }
                 }
-                return res.push(i);
-            });
-            return { items: tmp, totalAmount: state.totalAmount - toRemove };
+                return [...res, i];
+            }, []);
+            return { ...state, items: tmp, totalAmount: state.totalAmount - toRemove };
+        case 'calcTotalPrice':
+            let totalPrice = 0;
+            for (let i of state.items) {
+                totalPrice += Math.round(+i.amount * +i.price * 100) / 100;
+            }
+            return { ...state, totalPrice: Math.round(totalPrice * 100) / 100 }
         default:
             throw new Error();
     }
 };
 
 export const CartContextProvider = (props) => {
-    const [itemsList, dispatchItemsList] = useReducer(itemsListReducer, { items: [], totalAmount: 0 });
+    const [itemsList, dispatchItemsList] = useReducer(itemsListReducer, { items: [], totalAmount: 0, totalPrice: 0 });
 
     useEffect(() => {
         try {
@@ -59,15 +66,19 @@ export const CartContextProvider = (props) => {
                     totalAmount: storedItemsList.totalAmount
                 });
             }
-            else localStorage.setItem('itemsList', '{ "items": [], "totalAmount": 0 }');
+            else localStorage.setItem('itemsList', '{ "items": [], "totalAmount": 0, "totalPrice": 0 }');
         } catch (e) {
-            localStorage.setItem('itemsList', '{ "items": [], "totalAmount": 0 }');
+            localStorage.setItem('itemsList', '{ "items": [], "totalAmount": 0, "totalPrice": 0 }');
         }
     }, []);
 
     useEffect(() => {
         localStorage.setItem('itemsList', JSON.stringify(itemsList));
     }, [itemsList]);
+
+    useEffect(() => {
+        dispatchItemsList({ type: 'calcTotalPrice' })
+    }, [itemsList.totalAmount]);
 
     const addItemHandler = (item) => {
         dispatchItemsList({ type: 'addItem', item })
@@ -81,6 +92,7 @@ export const CartContextProvider = (props) => {
         <CartContext.Provider value={{
             items: itemsList.items,
             totalAmount: itemsList.totalAmount,
+            totalPrice: itemsList.totalPrice,
             addItem: addItemHandler,
             removeItem: removeItemHandler
         }}>

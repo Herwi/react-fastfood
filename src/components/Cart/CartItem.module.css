@@ -1,5 +1,5 @@
 .meal {
-    border-bottom: solid 1px;
+    border-bottom: solid 2px;
     border-color: #273c6648;
     padding: 1em 0;
     display: flex;
@@ -12,12 +12,6 @@
     font-weight: bold;
 }
 
-.description {
-    font-size: 14px;
-    line-height: 2.5em;
-    font-style: italic;
-}
-
 .price {
     color: #5685e3;
     font-weight: bold;    
@@ -26,5 +20,12 @@
 .amount {
     font-weight: bold;
     font-size: 14px;
+    line-height: 16px;
     line-height: 27px;
+    display: inline-block;
+    color: #000;
+    margin-left: 15px;
+    border: solid 1px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    padding: 0 10px;
 }
