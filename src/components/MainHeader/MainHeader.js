@@ -4,7 +4,7 @@ import classes from './MainHeader.module.css';
 import CartInfo from './CartInfo';
 
 const MainHeader = () => {
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     const onCloseCartHandler = () => {
         setModalVisible(false);
     };
