@@ -7,3 +7,7 @@
 .boxRight {
     margin-left: auto;
 }
+
+.flex {
+    display: flex;
+}

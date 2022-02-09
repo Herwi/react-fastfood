@@ -5,6 +5,9 @@ const Button = props => {
     if(props.inline) {
         className += " " + classes.inline;
     }
+    if(props.outline) {
+        className += " " + classes.outline;
+    }
     return (
         <button className={className} onClick={props.onClick}>{props.text}</button>
     );

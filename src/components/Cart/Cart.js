@@ -3,6 +3,7 @@ import Modal from "../UI/Modal/Modal";
 import CartContext from '../../store/CartContext';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
+import Button from '../UI/Button/Button';
 
 const Cart = props => {
     const cartCtx = useContext(CartContext);
@@ -28,6 +29,12 @@ const Cart = props => {
             <div className={classes.summary}>
                 <div>Total Price</div>
                 <div className={classes.boxRight}>${cartCtx.totalPrice}</div>
+            </div>
+            <div className={classes.flex}>
+                <div className={classes.boxRight}>
+                    <Button text="Cancel" inline={true} outline={true} onClick={props.onClose} />
+                    <Button text="Order" inline={true} />
+                </div>
             </div>
         </Modal>
     );

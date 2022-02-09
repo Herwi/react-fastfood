@@ -1,12 +1,18 @@
 .button {
     border-radius: 5px;
-    border: none;
+    border: solid 2px #5685e3;
     background: #5685e3;
     color: #fff;
     padding: 10px 15px;
     margin: 5px 0;
     width: 100%;
     cursor: pointer;
+}
+
+.outline {
+    background: transparent;
+    color: #5685e3;
+    font-weight: bold;
 }
 
 .inline {
